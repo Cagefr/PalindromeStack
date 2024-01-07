@@ -1,0 +1,58 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+
+using namespace std;
+
+#include "StackNode_char.h"
+#include "simpleStackClassNum.h"
+
+int main()
+{
+
+	int i,j,k;
+	int num;
+	int cnt;
+	char value;
+	bool found;
+	string word;
+	string rev;
+	
+	Stack *myStack;
+	StackNode *node;
+
+	cout << fixed << setprecision(2) << showpoint;
+
+	myStack =  createStack();
+
+	i = 0;
+	cout << "\n\t\t\tEnter a string: ";
+	getline(cin,word);
+
+	for(i=0;i<word.length();i++){
+
+		node = createNode(word[i]);
+
+		if(node != nullptr){
+			myStack->push(node);
+		}
+	}
+	
+	//destroyStack(myStack);
+
+	rev="";
+	cout << "\n\t\t\tReversing String: ";
+	while(!myStack->isEmptyStack()){
+		node = myStack->pop();
+
+		rev += node->getValue();
+	}
+
+	if(word == rev)
+		cout << "\n\n\t\t\tPalindrome ..." << word << " vs " << rev<<"\n\n\n";
+	else
+		cout << "\n\n\t\t\tNot A Palindrome ..." << word << " vs " << rev<<"\n\n\n";
+
+	return 0;
+}
